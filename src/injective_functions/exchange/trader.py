@@ -1,7 +1,7 @@
 import uuid
 from decimal import Decimal
-from injective_functions.base import InjectiveBase
-from injective_functions.utils.helpers import impute_market_id, base64convert
+from src.injective_functions.base import InjectiveBase
+from src.injective_functions.utils.helpers import impute_market_id, base64convert
 
 # TODO: serve endpoints of trader functions via an api
 # to isolate functions as much as possible

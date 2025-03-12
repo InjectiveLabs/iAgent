@@ -1,6 +1,6 @@
 from typing import Dict
-from injective_functions.base import InjectiveBase
-from injective_functions.utils.helpers import detailed_exception_info
+from src.injective_functions.base import InjectiveBase
+from src.injective_functions.utils.helpers import detailed_exception_info
 
 # TODO: Convert raw exchange message formats to human readable
 

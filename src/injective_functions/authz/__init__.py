@@ -1,5 +1,5 @@
-from injective_functions.utils.helpers import detailed_exception_info
-from injective_functions.base import InjectiveBase
+from src.injective_functions.utils.helpers import detailed_exception_info
+from src.injective_functions.base import InjectiveBase
 from typing import Dict, List
 
 

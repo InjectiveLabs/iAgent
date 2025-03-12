@@ -1,13 +1,17 @@
 from typing import Dict
-from injective_functions.utils.initializers import ChainInteractor
-from injective_functions.account import InjectiveAccounts
-from injective_functions.auction import InjectiveAuction
-from injective_functions.authz import InjectiveAuthz
-from injective_functions.bank import InjectiveBank
-from injective_functions.exchange.exchange import InjectiveExchange
-from injective_functions.exchange.trader import InjectiveTrading
-from injective_functions.staking import InjectiveStaking
-from injective_functions.token_factory import InjectiveTokenFactory
+from src.injective_functions.utils.initializers import ChainInteractor
+from src.injective_functions.account import InjectiveAccounts
+from src.injective_functions.auction import InjectiveAuction
+from src.injective_functions.authz import InjectiveAuthz
+from src.injective_functions.bank import InjectiveBank
+from src.injective_functions.exchange.exchange import InjectiveExchange
+from src.injective_functions.exchange.trader import InjectiveTrading
+from src.injective_functions.staking import InjectiveStaking
+from src.injective_functions.token_factory import InjectiveTokenFactory
+from src.injective_functions.utils.mito_requests import MitoAPIClient
+from src.injective_functions.wasm.mito_contracts import InjectiveMitoContracts
+
+MITO_BASE_URI = "https://k8s.mainnet.mito.grpc-web.injective.network/api/v1"
 
 
 class InjectiveClientFactory:
@@ -41,6 +45,8 @@ class InjectiveClientFactory:
             "trader": InjectiveTrading(chain_client),
             "staking": InjectiveStaking(chain_client),
             "token_factory": InjectiveTokenFactory(chain_client),
+            "mito_fetch_data": MitoAPIClient(MITO_BASE_URI),
+            "mito_transactions": InjectiveMitoContracts(chain_client),
         }
         print(clients)
         return clients

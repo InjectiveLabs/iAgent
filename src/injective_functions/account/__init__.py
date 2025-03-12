@@ -1,6 +1,9 @@
 from decimal import Decimal
-from injective_functions.base import InjectiveBase
-from injective_functions.utils.helpers import get_bridge_fee, detailed_exception_info
+from src.injective_functions.base import InjectiveBase
+from src.injective_functions.utils.helpers import (
+    get_bridge_fee,
+    detailed_exception_info,
+)
 from typing import Dict
 
 

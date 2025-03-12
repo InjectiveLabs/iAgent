@@ -1,5 +1,5 @@
 from typing import Optional
-from injective_functions.utils.initializers import ChainInteractor
+from src.injective_functions.utils.initializers import ChainInteractor
 
 
 class InjectiveBase:

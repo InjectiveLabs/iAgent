@@ -46,7 +46,8 @@ class InjectiveChatAgent:
             "./injective_functions/exchange/exchange_schema.json",
             "./injective_functions/staking/staking_schema.json",
             "./injective_functions/token_factory/token_factory_schema.json",
-            "./injective_functions/utils/utils_schema.json",
+            "./injective_functions/wasm/wasm_schema.json",
+            "./injective_functions/utils/mito_get_requests_schema.json",
         ]
         self.function_schemas = FunctionSchemaLoader.load_schemas(schema_paths)
 
@@ -260,8 +261,10 @@ async def ping():
 @app.route("/chat", methods=["POST"])
 async def chat_endpoint():
     """Main chat endpoint"""
-    data = await request.get_json()
     try:
+        data = await request.get_json()
+        print("Received data:", data)  # Debug print
+
         if not data or "message" not in data:
             return (
                 jsonify(
@@ -269,29 +272,34 @@ async def chat_endpoint():
                         "error": "No message provided",
                         "response": "Please provide a message to continue our conversation.",
                         "session_id": data.get("session_id", "default"),
-                        "agent_id": data.get("agent_id", "default"),
-                        "agent_key": data.get("agent_key", "default"),
-                        "environment": data.get("environment", "testnet"),
                     }
                 ),
                 400,
             )
 
         session_id = data.get("session_id", "default")
-        private_key = data.get("agent_key", "default")
         agent_id = data.get("agent_id", "default")
-        response = await agent.get_response(
-            data["message"], session_id, private_key, agent_id
-        )
 
+        print(f"Processing message for session {session_id}")  # Debug print
+
+        response = await agent.get_response(data["message"], session_id, agent_id)
+
+        print("Response:", response)  # Debug print
         return jsonify(response)
+
     except Exception as e:
+        print(f"Error in chat_endpoint: {str(e)}")  # Debug print
+        import traceback
+
+        traceback.print_exc()  # Print full stack trace
         return (
             jsonify(
                 {
                     "error": str(e),
                     "response": "I apologize, but I encountered an error. Please try again.",
-                    "session_id": data.get("session_id", "default"),
+                    "session_id": data.get("session_id", "default")
+                    if data
+                    else "default",
                 }
             ),
             500,

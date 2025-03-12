@@ -1,8 +1,8 @@
 from decimal import Decimal
-from injective_functions.base import InjectiveBase
+from src.injective_functions.base import InjectiveBase
 from typing import Dict, List
-from injective_functions.utils.indexer_requests import fetch_decimal_denoms
-from injective_functions.utils.helpers import detailed_exception_info
+from src.injective_functions.utils.indexer_requests import fetch_decimal_denoms
+from src.injective_functions.utils.helpers import detailed_exception_info
 
 
 class InjectiveBank(InjectiveBase):
